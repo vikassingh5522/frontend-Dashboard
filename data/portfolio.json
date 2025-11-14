@@ -1,0 +1,122 @@
+[
+  {
+    "stock": "Reliance Industries",
+    "purchasePrice": 2500,
+    "qty": 10,
+    "exchange": "NSE",
+    "sector": "Energy",
+    "symbol": "RELIANCE.NS"
+  },
+  {
+    "stock": "TCS",
+    "purchasePrice": 3200,
+    "qty": 5,
+    "exchange": "NSE",
+    "sector": "IT",
+    "symbol": "TCS.NS"
+  },
+  {
+    "stock": "Infosys",
+    "purchasePrice": 1500,
+    "qty": 8,
+    "exchange": "NSE",
+    "sector": "IT",
+    "symbol": "INFY.NS"
+  },
+  {
+    "stock": "HDFC Bank",
+    "purchasePrice": 1600,
+    "qty": 12,
+    "exchange": "NSE",
+    "sector": "Banking",
+    "symbol": "HDFCBANK.NS"
+  },
+  {
+    "stock": "ICICI Bank",
+    "purchasePrice": 900,
+    "qty": 15,
+    "exchange": "NSE",
+    "sector": "Banking",
+    "symbol": "ICICIBANK.NS"
+  },
+  {
+    "stock": "Kotak Mahindra Bank",
+    "purchasePrice": 1800,
+    "qty": 6,
+    "exchange": "NSE",
+    "sector": "Banking",
+    "symbol": "KOTAKBANK.NS"
+  },
+  {
+    "stock": "Hindustan Unilever",
+    "purchasePrice": 2400,
+    "qty": 7,
+    "exchange": "NSE",
+    "sector": "FMCG",
+    "symbol": "HINDUNILVR.NS"
+  },
+  {
+    "stock": "ITC",
+    "purchasePrice": 380,
+    "qty": 20,
+    "exchange": "NSE",
+    "sector": "FMCG",
+    "symbol": "ITC.NS"
+  },
+  {
+    "stock": "Asian Paints",
+    "purchasePrice": 3000,
+    "qty": 4,
+    "exchange": "NSE",
+    "sector": "Consumer",
+    "symbol": "ASIANPAINT.NS"
+  },
+  {
+    "stock": "Maruti Suzuki",
+    "purchasePrice": 9500,
+    "qty": 2,
+    "exchange": "NSE",
+    "sector": "Automobile",
+    "symbol": "MARUTI.NS"
+  },
+  {
+    "stock": "Tata Motors",
+    "purchasePrice": 700,
+    "qty": 10,
+    "exchange": "NSE",
+    "sector": "Automobile",
+    "symbol": "TATAMOTORS.NS"
+  },
+  {
+    "stock": "Titan Company",
+    "purchasePrice": 2600,
+    "qty": 3,
+    "exchange": "NSE",
+    "sector": "Retail",
+    "symbol": "TITAN.NS"
+  },
+  {
+    "stock": "UltraTech Cement",
+    "purchasePrice": 8500,
+    "qty": 1,
+    "exchange": "NSE",
+    "sector": "Cement",
+    "symbol": "ULTRACEMCO.NS"
+  },
+  {
+    "stock": "Adani Enterprises",
+    "purchasePrice": 2200,
+    "qty": 4,
+    "exchange": "NSE",
+    "sector": "Conglomerate",
+    "symbol": "ADANIENT.NS"
+  },
+  {
+    "stock": "Bajaj Finance",
+    "purchasePrice": 6500,
+    "qty": 2,
+    "exchange": "NSE",
+    "sector": "Finance",
+    "symbol": "BAJFINANCE.NS"
+  }
+]
