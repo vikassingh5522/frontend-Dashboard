@@ -27,32 +27,44 @@ export default function Dashboard() {
     const updated = await Promise.all(
       rows.map(async (row) => {
         try {
-          const priceRes = await axios.get(
-            `http://localhost:5000/api/price/${row.symbol}`
+
+          const cmpRes = await axios.get(
+            `http://localhost:5000/api/cmp/${row.symbol}`
           );
-          const detailsRes = await axios.get(
-            `http://localhost:5000/api/details/${row.symbol}`
+          const cmp = cmpRes.data.cmp;
+
+          const metricsRes = await axios.get(
+            `http://localhost:5000/api/metrics/${row.symbol}`
           );
+          const peRatio = metricsRes.data.peRatio;
+          const earnings = metricsRes.data.earnings;
 
           return {
             ...row,
-            cmp: priceRes.data.price,
-            peRatio: detailsRes.data.pe,
-            earnings: detailsRes.data.earnings,
+            cmp,
+            peRatio,
+            earnings,
           };
-        } catch {
-          return { ...row, cmp: null, peRatio: null, earnings: null };
+        } catch (error) {
+          return {
+            ...row,
+            cmp: null,
+            peRatio: null,
+            earnings: null,
+          };
         }
       })
     );
 
     setRows(updated);
   };
-
+  
   useEffect(() => {
+    fetchLiveData();
     const interval = setInterval(fetchLiveData, 15000);
     return () => clearInterval(interval);
   }, []);
+
 
   const totalInvestment = rows.reduce(
     (sum, r) => sum + r.purchasePrice * r.qty,
@@ -66,6 +78,7 @@ export default function Dashboard() {
 
   const gainLoss = currentValue - totalInvestment;
 
+
   const labels = rows.map((r) => r.symbol);
   const investedValues = rows.map((r) => r.purchasePrice * r.qty);
   const presentValues = rows.map((r) => (r.cmp ? r.cmp * r.qty : 0));
@@ -76,6 +89,7 @@ export default function Dashboard() {
       .filter((r) => r.sector === sector)
       .reduce((sum, r) => sum + r.purchasePrice * r.qty, 0)
   );
+
 
   const gainersAndLosers = rows
     .map((r) => ({
@@ -105,7 +119,7 @@ export default function Dashboard() {
 
       <div className="flex-1 ml-64 p-6">
 
-        <h1 className="text-4xl font mb-6 text-gray-900">
+        <h1 className="text-4xl font-bold mb-6 text-gray-900">
           📊 Dashboard Overview
         </h1>
 
@@ -116,19 +130,18 @@ export default function Dashboard() {
           count={rows.length}
         />
 
-
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          {/* Market Trend */}
           <div
-            className={`bg-white rounded-xl shadow-lg p-6 border-l-8 
-            ${gainLoss >= 0 ? "border-green-500" : "border-red-500"} 
-            hover:shadow-2xl transition`}
+            className={`bg-white rounded-xl shadow-lg p-6 border-l-8 ${gainLoss >= 0 ? "border-green-500" : "border-red-500"
+              } hover:shadow-2xl transition`}
           >
             <div className="flex items-center gap-5">
-              <img src={trendIcon} alt="trend" className="w-16 h-16" />
+              <img src={trendIcon} className="w-16 h-16" />
               <div>
-                <h2 className="text-xl font-bold text-gray-800">Market Trend</h2>
+                <h2 className="text-xl font-bold text-gray-800">
+                  Market Trend
+                </h2>
                 <p
                   className={`text-lg font-extrabold ${gainLoss >= 0 ? "text-green-600" : "text-red-600"
                     }`}
@@ -139,23 +152,21 @@ export default function Dashboard() {
             </div>
           </div>
 
-
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-8 border-green-400 hover:shadow-2xl transition">
-            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-              🏆 Top Gainer
-            </h2>
-            <p className="text-2xl font-semibold mt-2 text-gray-900">{topGainer?.symbol}</p>
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-8 border-green-400">
+            <h2 className="text-xl font-bold text-gray-800">🏆 Top Gainer</h2>
+            <p className="text-2xl font-semibold text-gray-900 mt-2">
+              {topGainer?.symbol}
+            </p>
             <p className="text-green-600 text-lg font-bold">
               {topGainer?.percentage.toFixed(2)}%
             </p>
           </div>
 
-
-          <div className="bg-white rounded-xl shadow-lg p-6 border-l-8 border-red-400 hover:shadow-2xl transition">
-            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-              📉 Top Loser
-            </h2>
-            <p className="text-2xl font-semibold mt-2 text-gray-900">{topLoser?.symbol}</p>
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-8 border-red-400">
+            <h2 className="text-xl font-bold text-gray-800">📉 Top Loser</h2>
+            <p className="text-2xl font-semibold text-gray-900 mt-2">
+              {topLoser?.symbol}
+            </p>
             <p className="text-red-600 text-lg font-bold">
               {topLoser?.percentage.toFixed(2)}%
             </p>
@@ -166,7 +177,11 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
           <PieChart labels={sectorLabels} values={sectorTotals} />
-          <BarChart labels={labels} invested={investedValues} present={presentValues} />
+          <BarChart
+            labels={labels}
+            invested={investedValues}
+            present={presentValues}
+          />
         </div>
 
       </div>
