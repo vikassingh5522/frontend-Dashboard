@@ -119,4 +119,85 @@
     "sector": "Finance",
     "symbol": "BAJFINANCE.NS"
   }
+  ,
+  {
+    "stock": "Reliance Industries",
+    "purchasePrice": 2450,
+    "qty": 5,
+    "exchange": "NSE",
+    "sector": "Conglomerate",
+    "symbol": "RELIANCE.NS"
+  },
+  {
+    "stock": "Tata Consultancy Services",
+    "purchasePrice": 3300,
+    "qty": 3,
+    "exchange": "NSE",
+    "sector": "IT",
+    "symbol": "TCS.NS"
+  },
+  {
+    "stock": "Infosys",
+    "purchasePrice": 1500,
+    "qty": 6,
+    "exchange": "NSE",
+    "sector": "IT",
+    "symbol": "INFY.NS"
+  },
+  {
+    "stock": "HDFC Bank",
+    "purchasePrice": 1650,
+    "qty": 4,
+    "exchange": "NSE",
+    "sector": "Banking",
+    "symbol": "HDFCBANK.NS"
+  },
+  {
+    "stock": "ICICI Bank",
+    "purchasePrice": 980,
+    "qty": 10,
+    "exchange": "NSE",
+    "sector": "Banking",
+    "symbol": "ICICIBANK.NS"
+  },
+  {
+    "stock": "Asian Paints",
+    "purchasePrice": 2900,
+    "qty": 3,
+    "exchange": "NSE",
+    "sector": "Consumer",
+    "symbol": "ASIANPAINT.NS"
+  },
+  {
+    "stock": "Maruti Suzuki",
+    "purchasePrice": 9500,
+    "qty": 1,
+    "exchange": "NSE",
+    "sector": "Automobile",
+    "symbol": "MARUTI.NS"
+  },
+  {
+    "stock": "UltraTech Cement",
+    "purchasePrice": 7800,
+    "qty": 1,
+    "exchange": "NSE",
+    "sector": "Cement",
+    "symbol": "ULTRACEMCO.NS"
+  },
+  {
+    "stock": "Tata Motors",
+    "purchasePrice": 600,
+    "qty": 10,
+    "exchange": "NSE",
+    "sector": "Automobile",
+    "symbol": "TATAMOTORS.NS"
+  },
+  {
+    "stock": "Bajaj Finance",
+    "purchasePrice": 6500,
+    "qty": 2,
+    "exchange": "NSE",
+    "sector": "Finance",
+    "symbol": "BAJFINANCE.NS"
+  }
 ]

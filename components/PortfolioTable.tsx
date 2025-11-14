@@ -1,7 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import portfolioData from "../data/portfolio.json";
 import { calculateRow } from "../utils/calculateValues";
-
 
 type PortfolioItem = {
   stock: string;
@@ -10,7 +11,6 @@ type PortfolioItem = {
   exchange: string;
   sector: string;
   symbol: string;
-
   cmp?: number | null;
   pe?: number | null;
   earnings?: number | null;
@@ -30,8 +30,7 @@ export default function PortfolioTable() {
 
   async function loadMetrics(symbol: string) {
     const res = await fetch(`http://localhost:5000/api/metrics/${symbol}`);
-    const data = await res.json();
-    return data;
+    return await res.json();
   }
 
   async function loadData() {
@@ -47,7 +46,7 @@ export default function PortfolioTable() {
           cmp,
           pe: metrics.peRatio,
           earnings: metrics.earnings,
-          ...calc
+          ...calc,
         };
       })
     );
@@ -56,24 +55,22 @@ export default function PortfolioTable() {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      await loadData();
-    };
+    loadData();
 
-    fetchData();
-
-    const interval = setInterval(fetchData, 15000);
+    const interval = setInterval(loadData, 15000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
-      <h1 className="text-3xl font-extrabold mb-6 text-indigo-700 drop-shadow">
+    <div className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl shadow-xl min-h-screen">
+
+      <h1 className="text-3xl font-extra mb-6 text-gray-900 drop-shadow flex items-center gap-2">
         📊 Portfolio Dashboard
       </h1>
 
-      <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
+      <div className="overflow-x-auto rounded-xl shadow-xl bg-white border">
         <table className="w-full text-black">
+
           <thead className="bg-indigo-600 text-white">
             <tr>
               <th className="p-3 border">Stock</th>
@@ -101,10 +98,11 @@ export default function PortfolioTable() {
                 <td className="p-3 border">{item.presentValue}</td>
 
                 <td
-                  className={`p-3 border font-bold text-lg ${item.gainLoss && item.gainLoss >= 0
+                  className={`p-3 border font-bold text-lg ${
+                    item.gainLoss && item.gainLoss >= 0
                       ? "text-green-600"
                       : "text-red-600"
-                    }`}
+                  }`}
                 >
                   {item.gainLoss}
                 </td>
@@ -114,6 +112,7 @@ export default function PortfolioTable() {
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
     </div>
