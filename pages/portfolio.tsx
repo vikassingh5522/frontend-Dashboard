@@ -2,7 +2,6 @@
 
 import Navbar from "../components/Navbar";
 import PortfolioTable from "../components/PortfolioTable";
-import portfolio from "../data/portfolio.json";
 
 export default function PortfolioPage() {
   return (
@@ -10,7 +9,7 @@ export default function PortfolioPage() {
       <Navbar />
       <div className="p-6">
         <h1 className="text-4xl font-bold mb-6">Portfolio Table</h1>
-        <PortfolioTable rows={portfolio} />
+        <PortfolioTable />
       </div>
     </div>
   );

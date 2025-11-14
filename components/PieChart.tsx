@@ -1,18 +1,21 @@
 "use client";
 
-
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+interface PieChartProps {
+    labels: string[];
+    values: number[];
+}
 
-export function PieChart({ labels, values }: any) {
+export function PieChart({ labels, values }: PieChartProps) {
     return (
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full h-[480px] border border-gray-200">
-            <h2 className="text-3xl font-bold mb-6 text-center text-purple-600">📊 Sector Allocation</h2>
-
+            <h2 className="text-3xl font-bold mb-6 text-center text-purple-600">
+                📊 Sector Allocation
+            </h2>
 
             <div className="flex justify-center h-[360px]">
                 <Pie
@@ -38,7 +41,10 @@ export function PieChart({ labels, values }: any) {
                             },
                         ],
                     }}
-                    options={{ responsive: true, maintainAspectRatio: false }}
+                    options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }}
                 />
             </div>
         </div>

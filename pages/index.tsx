@@ -5,13 +5,24 @@ import axios from "axios";
 
 import Navbar from "../components/Navbar";
 import SummaryCards from "../components/SummaryCards";
-import{ PieChart} from "../components/PieChart";
+import { PieChart } from "../components/PieChart";
 import BarChart from "../components/BarChart";
 
 import portfolio from "../data/portfolio.json";
 
+
+interface PortfolioRow {
+  symbol: string;
+  sector?: string;
+  purchasePrice: number;
+  qty: number;
+  cmp?: number | null;
+  peRatio?: number | null;
+  earnings?: number | null;
+}
+
 export default function Dashboard() {
-  const [rows, setRows] = useState<any[]>(portfolio);
+  const [rows, setRows] = useState<PortfolioRow[]>(portfolio);
 
   const fetchLiveData = async () => {
     const updated = await Promise.all(
@@ -39,13 +50,15 @@ export default function Dashboard() {
     setRows(updated);
   };
 
+ 
   useEffect(() => {
-    fetchLiveData();
+    // fetchLiveData();
     const interval = setInterval(fetchLiveData, 15000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
 
- 
+  
+
   const totalInvestment = rows.reduce(
     (sum, r) => sum + r.purchasePrice * r.qty,
     0
@@ -58,22 +71,19 @@ export default function Dashboard() {
 
   const gainLoss = currentValue - totalInvestment;
 
-
   const labels = rows.map((r) => r.symbol);
   const investedValues = rows.map((r) => r.purchasePrice * r.qty);
   const presentValues = rows.map((r) => (r.cmp ? r.cmp * r.qty : 0));
 
   const sectorLabels = [...new Set(rows.map((r) => r.sector || "Unknown"))];
-  const sectorTotals = sectorLabels.map(
-    (sector) =>
-      rows
-        .filter((r) => r.sector === sector)
-        .reduce((sum, r) => sum + r.purchasePrice * r.qty, 0)
+  const sectorTotals = sectorLabels.map((sector) =>
+    rows
+      .filter((r) => r.sector === sector)
+      .reduce((sum, r) => sum + r.purchasePrice * r.qty, 0)
   );
 
   return (
     <div className="min-h-screen bg-gray-100">
-      
       <Navbar />
 
       <div className="p-6">
@@ -81,7 +91,6 @@ export default function Dashboard() {
           📊 Dashboard Overview
         </h1>
 
-     
         <SummaryCards
           totalInvestment={totalInvestment}
           currentValue={currentValue}
@@ -89,7 +98,6 @@ export default function Dashboard() {
           count={rows.length}
         />
 
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
           <PieChart labels={sectorLabels} values={sectorTotals} />
           <BarChart
